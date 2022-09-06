@@ -5,20 +5,26 @@ import json as js
 url = "https://www.melon.com/chart/index.htm"
 
 html = r.get(url, headers={"User-Agent": "XY"})
-doc = BeautifulSoup(html.text, "html.parser")
 
-result = doc("tr", attrs={"data-song-no": True})
+def prettifyDictionary(dict):
+    jsonString = js.dumps(dict, ensure_ascii=False, indent = 4)
+    return jsonString
 
-ranking = {}
-rank = 1
-for tag in result:
-    ranking[rank] = {
-        "title": tag.find(class_="ellipsis rank01").text.replace('\n', ''),
-        "artist": tag.find,
-        "album": tag.find,
-        "rank": tag.find(class_="rank").text,
-    }
-    rank += 1
+def getRanking():
+    doc = BeautifulSoup(html.text, "html.parser")
+    allTags = doc("tr", attrs={"data-song-no": True})
+    ranking = {}
+    rank = 1
+    for tag in allTags:
+        ranking[rank] = {
+            "title": tag.find(class_="ellipsis rank01").text.replace('\n', ''),
+            "artist": tag.find(class_="checkEllipsis").text.replace('\n', ''),
+            "album": tag.find(class_="ellipsis rank03").text.replace('\n', ''),
+            "rank": tag.find(class_="rank").text,
+        }
+        rank += 1
+    return ranking
 
-jsonString = js.dumps(ranking, ensure_ascii=False, indent = 4)
-print(jsonString)
+result = getRanking()
+# print(prettifyDictionary(result))
+print(prettifyDictionary(result[15]))
