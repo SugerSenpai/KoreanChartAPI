@@ -20,11 +20,11 @@ def getRanking():
             "title": tag.find(class_="ellipsis rank01").text.replace('\n', ''),
             "artist": tag.find(class_="checkEllipsis").text.replace('\n', ''),
             "album": tag.find(class_="ellipsis rank03").text.replace('\n', ''),
-            "rank": tag.find(class_="rank").text,
+            "rank": rank,
         }
         rank += 1
     return ranking
 
 result = getRanking()
-# print(prettifyDictionary(result))
-print(prettifyDictionary(result[15]))
+print(prettifyDictionary(result))
+# print(prettifyDictionary(result[15]['title']))
