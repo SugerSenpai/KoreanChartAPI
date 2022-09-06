@@ -1,4 +1,3 @@
-from codecs import ascii_encode
 from bs4 import BeautifulSoup
 import requests as r
 import json as js
