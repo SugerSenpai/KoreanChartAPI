@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests as r
-import json as js
 
 from MelonAPI import prettifyDictionary
 
@@ -37,3 +36,4 @@ def getRanking():
 
 result = getRanking()
 print(prettifyDictionary(result))
+# print(prettifyDictionary(result[15]))
