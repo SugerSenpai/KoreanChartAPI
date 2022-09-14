@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 from TestCases import prettifyDictionary
 import requests as r
-import json as js
 
 url = "https://www.melon.com/chart/index.htm"
 
