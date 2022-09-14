@@ -1,5 +1,4 @@
 import time
-import requests as r
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
@@ -28,10 +27,10 @@ def getRanking():
             "rank": rank
         }
         rank +=1
+    driver.quit
     return ranking
 
 result = getRanking()
-driver.quit
 
 print(prettifyDictionary(result))
 # print(prettifyDictionary(result[15]['title']))
