@@ -13,6 +13,7 @@ driver.get(url)
 def getRanking():
     ranking = {}
     rank = 1
+    # delay is necessary, because the youtube app need to load
     time.sleep(1)
     title = driver.find_elements(By.XPATH, '//span[@class="ytmc-ellipsis-text style-scope"]')
     artist = driver.find_elements(By.XPATH, '//span[@class="ytmc-artist-name clickable style-scope ytmc-artists-list"]')

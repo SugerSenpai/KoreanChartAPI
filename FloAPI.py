@@ -13,7 +13,6 @@ driver.get(url)
 def getRanking():
     ranking = {}
     rank = 1
-    time.sleep(1)
     button = driver.find_element(By.CLASS_NAME, "btn_list_more")
     button.send_keys(Keys.RETURN)
     title = driver.find_elements(By.CLASS_NAME, "tit__text")
