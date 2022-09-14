@@ -14,16 +14,20 @@ driver.get(url)
 def getRanking():
     ranking = {}
     rank = 1
-    time.sleep(10)
+    time.sleep(1)
     button = driver.find_element(By.CLASS_NAME, "btn_list_more")
     button.send_keys(Keys.RETURN)
-    allTags = driver.find_elements(By.TAG_NAME, "tr")
-    for tag in allTags:{
-        "title": tag.find_element(By.CLASS_NAME, "tit__text").text,
-        "artist": tag.find_element(By.CLASS_NAME, "last").text,
-        "album": tag.find_element(By.CLASS_NAME, "album").text,
-        "rank": rank,
-    }
+    title = driver.find_elements(By.CLASS_NAME, "tit__text")
+    artist = driver.find_elements(By.CLASS_NAME, "last")
+    album = driver.find_elements(By.CLASS_NAME, "album")
+    for i in range(len(title)):
+        ranking[rank] = {
+            "title": title[i].text.strip(),
+            "artist": artist[i].text.strip(),
+            "album": album[i].text.strip(),
+            "rank": rank
+        }
+        rank +=1
     return ranking
 
 result = getRanking()
