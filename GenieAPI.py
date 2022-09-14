@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
+from TestCases import prettifyDictionary
 import requests as r
-
-from MelonAPI import prettifyDictionary
 
 url1 = "https://genie.co.kr/chart/top200?ditc=D&ymd=20220906&hh=19&rtm=Y&pg=1"
 url2 = "https://genie.co.kr/chart/top200?ditc=D&ymd=20220906&hh=19&rtm=Y&pg=2"
@@ -34,6 +33,4 @@ def getRanking():
         rank += 1
     return ranking
 
-result = getRanking()
-print(prettifyDictionary(result))
-# print(prettifyDictionary(result[15]))
+print(prettifyDictionary(getRanking()))

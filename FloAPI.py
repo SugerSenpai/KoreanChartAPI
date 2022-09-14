@@ -1,10 +1,10 @@
 import time
+from TestCases import prettifyDictionary
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from MelonAPI import prettifyDictionary
 
 url = "https://www.music-flo.com/browse"
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -13,6 +13,8 @@ driver.get(url)
 def getRanking():
     ranking = {}
     rank = 1
+    # delay is necessary, because the flo app needs to load
+    time.sleep(1)
     button = driver.find_element(By.CLASS_NAME, "btn_list_more")
     button.send_keys(Keys.RETURN)
     title = driver.find_elements(By.CLASS_NAME, "tit__text")
@@ -29,7 +31,4 @@ def getRanking():
     driver.quit
     return ranking
 
-result = getRanking()
-
-print(prettifyDictionary(result))
-# print(prettifyDictionary(result[15]['title']))
+print(prettifyDictionary(getRanking()))

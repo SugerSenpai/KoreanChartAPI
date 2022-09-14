@@ -1,10 +1,11 @@
 import time
+from TestCases import prettifyDictionary
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from MelonAPI import prettifyDictionary
+
 
 url = "https://charts.youtube.com/charts/TopSongs/kr"
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -13,7 +14,7 @@ driver.get(url)
 def getRanking():
     ranking = {}
     rank = 1
-    # delay is necessary, because the youtube app need to load
+    # delay is necessary, because the youtube app needs to load
     time.sleep(1)
     title = driver.find_elements(By.XPATH, '//span[@class="ytmc-ellipsis-text style-scope"]')
     artist = driver.find_elements(By.XPATH, '//span[@class="ytmc-artist-name clickable style-scope ytmc-artists-list"]')
@@ -29,7 +30,4 @@ def getRanking():
     driver.quit
     return ranking
 
-result = getRanking()
-
-print(prettifyDictionary(result))
-# print(prettifyDictionary(result[15]['title']))
+print(prettifyDictionary(getRanking()))

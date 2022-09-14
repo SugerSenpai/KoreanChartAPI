@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from TestCases import prettifyDictionary
 import requests as r
 import json as js
 
@@ -6,9 +7,6 @@ url = "https://www.melon.com/chart/index.htm"
 
 html = r.get(url, headers={"User-Agent": "XY"})
 
-def prettifyDictionary(dict):
-    jsonString = js.dumps(dict, ensure_ascii=False, indent = 4)
-    return jsonString
 
 def getRanking():
     doc = BeautifulSoup(html.text, "html.parser")
@@ -25,6 +23,5 @@ def getRanking():
         rank += 1
     return ranking
 
-result = getRanking()
-# print(prettifyDictionary(result))
-# print(prettifyDictionary(result[15]['title']))
+print(prettifyDictionary(getRanking()))
+print(prettifyDictionary(getRanking()[15]['title']))
