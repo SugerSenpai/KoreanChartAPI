@@ -1,3 +1,4 @@
+from re import I
 import time
 from TestCases import prettifyDictionary
 from selenium import webdriver
@@ -14,13 +15,12 @@ driver.get(url)
 def getRanking():
     ranking = {}
     rank = 1
-    # delay is necessary, because the youtube app needs to load
     time.sleep(1)
-    title = driver.find_elements(By.XPATH, '//span[@class="ytmc-ellipsis-text style-scope"]')
-    artist = driver.find_elements(By.XPATH, '//span[@class="ytmc-artist-name clickable style-scope ytmc-artists-list"]')
+    title = driver.find_elements(By.XPATH, './/span[@class="ytmc-ellipsis-text style-scope"]')
+    artist = driver.find_elements(By.XPATH, './/div[@class="ytmc-artists-list-container style-scope ytmc-artists-list"]')
     for i in range(len(artist)):
         ranking[rank] = {
-            # because youtube has 2 extra classes for their top banner, we need to start the array with +2
+            # youtube has a top banner with two extra 'ytmc-ellipsis-text style-scope' span classes for the No. 1 song so we skip them to get the top 100
             "title": title[i+2].text,
             "artist": artist[i].text,
             "album": "no album on youtube",
@@ -29,5 +29,6 @@ def getRanking():
         rank += 1
     driver.quit
     return ranking
+
 
 print(prettifyDictionary(getRanking()))
