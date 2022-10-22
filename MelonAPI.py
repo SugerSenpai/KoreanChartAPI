@@ -23,4 +23,4 @@ def getRanking():
     return ranking
 
 print(prettifyDictionary(getRanking()))
-print(prettifyDictionary(getRanking()[15]['title']))
+# print(prettifyDictionary(getRanking()[15]['title']))
