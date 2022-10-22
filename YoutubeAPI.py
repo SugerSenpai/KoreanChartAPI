@@ -19,7 +19,7 @@ def getRanking():
     ranking = {}
     rank = 1
     delay = 3
-    # because youtube app needs to load we add a delay
+    # delay is necessary, because the youtube app needs to load
     try:
         element_present = EC.presence_of_element_located((By.XPATH, './/span[@class="ytmc-ellipsis-text style-scope"]'))
         WebDriverWait(driver, delay).until(element_present)
