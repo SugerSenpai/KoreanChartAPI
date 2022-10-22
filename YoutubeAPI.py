@@ -6,6 +6,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 url = "https://charts.youtube.com/charts/TopSongs/kr"
@@ -15,7 +18,13 @@ driver.get(url)
 def getRanking():
     ranking = {}
     rank = 1
-    time.sleep(1)
+    delay = 3
+    # because youtube app needs to load we add a delay
+    try:
+        element_present = EC.presence_of_element_located((By.XPATH, './/span[@class="ytmc-ellipsis-text style-scope"]'))
+        WebDriverWait(driver, delay).until(element_present)
+    except TimeoutException:
+        print ("Page could not be loaded")
     title = driver.find_elements(By.XPATH, './/span[@class="ytmc-ellipsis-text style-scope"]')
     artist = driver.find_elements(By.XPATH, './/div[@class="ytmc-artists-list-container style-scope ytmc-artists-list"]')
     for i in range(len(artist)):
