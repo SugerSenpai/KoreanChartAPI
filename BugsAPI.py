@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from TestCases import prettifyDictionary
+from TestCases import *
 import requests as r
 
 url = "https://m.bugs.co.kr/chart"

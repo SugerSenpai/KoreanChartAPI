@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from TestCases import prettifyDictionary
+from TestCases import *
 import requests as r
 
 url = "https://www.melon.com/chart/index.htm"
@@ -23,4 +23,3 @@ def getRanking():
     return ranking
 
 print(prettifyDictionary(getRanking()))
-# print(prettifyDictionary(getRanking()[15]['title']))

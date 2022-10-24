@@ -1,6 +1,4 @@
-from re import I
-import time
-from TestCases import prettifyDictionary
+from TestCases import *
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys

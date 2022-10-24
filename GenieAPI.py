@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from TestCases import prettifyDictionary
+from TestCases import *
 import requests as r
 
 url1 = "https://genie.co.kr/chart/top200?ditc=D&ymd=20220906&hh=19&rtm=Y&pg=1"
