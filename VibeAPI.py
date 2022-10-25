@@ -1,4 +1,4 @@
-from TestCases import *
+from Util import *
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
@@ -16,18 +16,19 @@ driver.get(url)
 driver.maximize_window()
 
 
-
 def getRanking():
     ranking = {}
     rank = 1
     delay = 3
     # delay is necessary, because the vibe app needs to load
     try:
-        element_present = EC.presence_of_element_located((By.XPATH, '//*[@id="app"]/div[2]/div/div/a[2]'))
+        element_present = EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="app"]/div[2]/div/div/a[2]'))
         WebDriverWait(driver, delay).until(element_present)
     except TimeoutException:
-        print ("Page could not be loaded")
-    driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div/div/a[2]').send_keys(Keys.RETURN)
+        print("Page could not be loaded")
+    driver.find_element(
+        By.XPATH, '//*[@id="app"]/div[2]/div/div/a[2]').send_keys(Keys.RETURN)
     title = driver.find_elements(By.XPATH, './/div[@class="title_badge_wrap"]')
     artist = driver.find_elements(By.XPATH, './/td[@class="artist"]/span')
     album = driver.find_elements(By.XPATH, './/a[@class="link"]')
@@ -38,8 +39,9 @@ def getRanking():
             "album": album[i].text,
             "rank": rank
         }
-        rank +=1
+        rank += 1
     driver.quit
     return ranking
+
 
 print(prettifyDictionary(getRanking()))

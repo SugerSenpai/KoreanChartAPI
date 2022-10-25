@@ -1,4 +1,4 @@
-from TestCases import *
+from Util import *
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
@@ -12,16 +12,18 @@ url = "https://www.music-flo.com/browse"
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.get(url)
 
+
 def getRanking():
     ranking = {}
     rank = 1
     delay = 3
     # because flo app needs to load we add a delay
     try:
-        element_present = EC.presence_of_element_located((By.CLASS_NAME, "btn_list_more"))
+        element_present = EC.presence_of_element_located(
+            (By.CLASS_NAME, "btn_list_more"))
         WebDriverWait(driver, delay).until(element_present)
     except TimeoutException:
-        print ("Page could not be loaded")
+        print("Page could not be loaded")
     button = driver.find_element(By.CLASS_NAME, "btn_list_more")
     button.send_keys(Keys.RETURN)
     title = driver.find_elements(By.CLASS_NAME, "tit__text")
@@ -34,8 +36,9 @@ def getRanking():
             "album": album[i].text.strip(),
             "rank": rank
         }
-        rank +=1
+        rank += 1
     driver.quit
     return ranking
+
 
 print(prettifyDictionary(getRanking()))

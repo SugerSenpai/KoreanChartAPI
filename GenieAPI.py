@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from TestCases import *
+from Util import *
 import requests as r
 
 url1 = "https://genie.co.kr/chart/top200?ditc=D&ymd=20220906&hh=19&rtm=Y&pg=1"
@@ -7,6 +7,7 @@ url2 = "https://genie.co.kr/chart/top200?ditc=D&ymd=20220906&hh=19&rtm=Y&pg=2"
 
 html1 = r.get(url1, headers={"User-Agent": "XY"})
 html2 = r.get(url2, headers={"User-Agent": "XY"})
+
 
 def getRanking():
     doc = BeautifulSoup(html1.text, "html.parser")
@@ -32,5 +33,6 @@ def getRanking():
         }
         rank += 1
     return ranking
+
 
 print(prettifyDictionary(getRanking()))
