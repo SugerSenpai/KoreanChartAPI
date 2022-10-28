@@ -20,7 +20,7 @@ def getRanking():
             "rank": rank,
         }
         rank += 1
-    return ranking
+    return prettifyDictionary(ranking)
 
 
-print(prettifyDictionary(getRanking()))
+print(getRanking())

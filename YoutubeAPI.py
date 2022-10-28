@@ -38,8 +38,8 @@ def getRanking():
             "rank": rank
         }
         rank += 1
-    driver.quit
-    return ranking
+    driver.quit()
+    return prettifyDictionary(ranking)
 
 
-print(prettifyDictionary(getRanking()))
+print(getRanking())
